@@ -8,7 +8,7 @@ const addressSchema = new Schema(
     {
         addresses: [String],
         user: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.String,
             ref: "User"
         }
     }

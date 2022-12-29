@@ -12,7 +12,7 @@ router.get("/addresses", async (req, res, next) => {
   }
 });
 
-router.get("/addresses/:id", async (req, res, next) => {
+router.get("/addresses/:address", async (req, res, next) => {
   try {
     const addresses = await Address.find({user: req.params.address});
     res.json(addresses);
@@ -21,10 +21,10 @@ router.get("/addresses/:id", async (req, res, next) => {
   }
 });
 
-router.post("/newAddress/:id", async (req, res, next) => {
+router.post("/newAddress/:address", async (req, res, next) => {
   try {
-    req.body.user = req.body.user;
-    req.body.address = req.params.address;
+    req.body.addresses = req.body.address;
+    req.body.user = req.params.address;
     const newAddress = await Address.create(req.body);
     res.status(201).json(newAddress);
   } catch (err) {
