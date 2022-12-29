@@ -2,7 +2,7 @@ const mongoose = require('../db/connection');
 const Schema = mongoose.Schema;
 
 
-// Item Schema Model
+// User Schema Model
 const userSchema = new Schema(
     {
         address: String,

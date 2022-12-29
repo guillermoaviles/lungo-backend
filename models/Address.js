@@ -3,7 +3,7 @@ const mongoose = require('../db/connection');
 const Schema = mongoose.Schema;
 
 
-// Comment Schema Model
+// Adress Schema Model
 const addressSchema = new Schema(
     {
         addresses: [String],
