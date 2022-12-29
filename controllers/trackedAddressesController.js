@@ -14,7 +14,7 @@ router.get("/addresses", async (req, res, next) => {
 
 router.get("/addresses/:id", async (req, res, next) => {
   try {
-    const addresses = await Address.find({user: req.params.id});
+    const addresses = await Address.find({user: req.params.address});
     res.json(addresses);
   } catch (err) {
     next(err);
@@ -23,8 +23,8 @@ router.get("/addresses/:id", async (req, res, next) => {
 
 router.post("/newAddress/:id", async (req, res, next) => {
   try {
-    req.body.user = req.body.user ? req.body.user : "Anonymous"
-    req.body.item = req.params.id;
+    req.body.user = req.body.user;
+    req.body.address = req.params.address;
     const newAddress = await Address.create(req.body);
     res.status(201).json(newAddress);
   } catch (err) {
