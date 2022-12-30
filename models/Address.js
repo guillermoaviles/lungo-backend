@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 // Adress Schema Model
 const addressSchema = new Schema(
     {
-        addresses: [String],
+        addresses: String,
         user: {
             type: mongoose.Schema.Types.String,
             ref: "User"

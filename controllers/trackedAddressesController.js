@@ -23,7 +23,7 @@ router.get("/addresses/:address", async (req, res, next) => {
 
 router.post("/newAddress/:address", async (req, res, next) => {
   try {
-    req.body.addresses = req.body.address;
+    req.body.addresses = req.body.addresses;
     req.body.user = req.params.address;
     const newAddress = await Address.create(req.body);
     res.status(201).json(newAddress);
@@ -32,10 +32,10 @@ router.post("/newAddress/:address", async (req, res, next) => {
   }
 });
 
-router.delete("/deleteAddress/:id", async (req, res, next) => {
+router.delete("/deleteAddress/:user/:address", async (req, res, next) => {
   try {
     const deleteAddress = await Address.findOneAndDelete({
-      _id: req.params.id,
+      user: req.params.id,
     })
     .then((item) => {
       res.sendStatus(202)
