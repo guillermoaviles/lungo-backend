@@ -45,6 +45,21 @@ router.put("/addAddress/:address", async (req, res, next) => {
   }
 });
 
+router.put("/deleteAddress/:address", async (req, res, next) => {
+  try {
+    const userUpdate = await User.findOneAndUpdate(
+      { address: req.params.address }, 
+      { $pull: { addresses: req.body.addresses } },
+      {
+        new: true
+      }
+    );
+    res.status(201).json(userUpdate);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete("/deleteItem/:address", async (req, res, next) => {
   try {
     const deleteUser = await User.findOneAndDelete({ address: req.params.address })
