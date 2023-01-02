@@ -24,9 +24,6 @@ const usersController = require('./controllers/usersController');
 app.use('/api/lungo-backend/', usersController);
 
 
-const trackedAddressesController = require('./controllers/trackedAddressesController');
-app.use('/api/lungo-backend/', trackedAddressesController);
-
 
 // End Controllers
 app.use((err, req, res, next) => {

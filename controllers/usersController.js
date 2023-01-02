@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/User");
-const Address = require('../models/Address')
 
 router.get("/users", async (req, res, next) => {
   try {
@@ -31,11 +30,25 @@ router.post("/newUser", async (req, res, next) => {
   }
 });
 
+router.put("/addAddress/:address", async (req, res, next) => {
+  try {
+    const userUpdate = await User.findOneAndUpdate(
+      { address: req.params.address }, 
+      { $push: { addresses: req.body.addresses } },
+      {
+        new: true
+      }
+    );
+    res.status(201).json(userUpdate);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete("/deleteItem/:address", async (req, res, next) => {
   try {
     const deleteUser = await User.findOneAndDelete({ address: req.params.address })
-    const deleteAddresses = await Address.deleteMany({user: req.params.address})
-    .then((user) => {
+    .then((deleteUser) => {
       res.sendStatus(204)
     })
   } catch (err) {
