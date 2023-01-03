@@ -23,7 +23,9 @@ router.get("/users/:address", async (req, res, next) => {
 
 router.post("/newUser", async (req, res, next) => {
   try {
+    console.log("the request I am receiving: ", req)
     const newUser = await User.create(req.body);
+    console.log('new user created')
     res.status(201).json(newUser);
   } catch (err) {
     next(err);
