@@ -14,7 +14,7 @@ router.get("/users", async (req, res, next) => {
 
 router.get("/users/:address", async (req, res, next) => {
   try {
-    const user = await User.findOne({address: req.params.address.toLowerCase()});
+    const user = await User.findOne({address: req.params.address});
     res.json(user);
   } catch (err) {
     next(err);
@@ -23,10 +23,20 @@ router.get("/users/:address", async (req, res, next) => {
 
 router.post("/newUser", async (req, res, next) => {
   try {
-    console.log("the request I am receiving: ", req)
-    const newUser = await User.create(req.body);
-    console.log('new user created')
-    res.status(201).json(newUser);
+    const user = await User.findOne({address: req.body.address});
+    console.log('user', user)
+    console.log('req.body.address', req.body.address)
+    if (user) {
+      res.status(200).json(user)
+    } else {
+      const newUser = await User.create(req.body);
+      console.log('new user created')
+      res.status(201).json(newUser);
+    }
+    // console.log("the request I am receiving: ", req)
+    // const newUser = await User.create(req.body);
+    // console.log('new user created')
+    // res.status(201).json(newUser);
   } catch (err) {
     next(err);
   }
